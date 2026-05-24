@@ -5,7 +5,7 @@ This repository contains the code and dataset for the paper: **"Following comple
 
 ## How to Run
 
-### 0. Preparation
+### Preparation
 
 First, navigate to the `ms-swift` directory:
 
