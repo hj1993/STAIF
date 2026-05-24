@@ -1,0 +1,31 @@
+CUDA_VISIBLE_DEVICES=0 \
+swift rlhf \
+    --rlhf_type grpo \
+    --model /root/autodl-tmp/model/Qwen/Qwen3-4B \
+    --train_type lora \
+    --dataset /root/autodl-tmp/data_grpo/train_rule_rl1_1204_overlap_with_dpo_0114.json \
+    --external_plugins /root/autodl-tmp/ms-swift/examples/train/grpo/plugin/rule_code_reward_plugin.py \
+    --reward_funcs dataset_rule_code_reward \
+    --rule_reward_aggregation mean \
+    --torch_dtype bfloat16 \
+    --attn_impl sdpa \
+    --lora_rank 8 \
+    --lora_alpha 32 \
+    --target_modules all-linear \
+    --max_length 2048 \
+    --max_completion_length 768 \
+    --num_generations 4 \
+    --per_device_train_batch_size 4 \
+    --gradient_accumulation_steps 1 \
+    --learning_rate 1e-5 \
+    --num_train_epochs 1 \
+    --save_steps 50 \
+    --eval_steps 50 \
+    --save_total_limit 2 \
+    --logging_steps 5 \
+    --warmup_ratio 0.03 \
+    --dataloader_num_workers 2 \
+    --dataset_num_proc 2 \
+    --temperature 0.9 \
+    --log_completions true \
+    --output_dir /root/autodl-tmp/output/grpo_rule_code_reward_mean
